@@ -19,7 +19,6 @@ int run_switches(char *input) {
     if (c == '\0') {
       return res;
     }
-    const int add = c == 's' ? 1 : c == 'p' ? -1 : 0;
-    res += add;
+    res += c == 's' ? 1 : c == 'p' ? -1 : 0;
   } while (true);
 }
