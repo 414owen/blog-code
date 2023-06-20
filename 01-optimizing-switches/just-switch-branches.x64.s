@@ -7,7 +7,7 @@
 
 run_switches:
         xor  rax, rax            # res = 0
-        b    loop
+        jmp  loop
 p:
         sub  rax, 2
 s:

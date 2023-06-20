@@ -1,4 +1,11 @@
-all: bench-c-gcc bench-c-clang bench-x64-branches-inverted bench-x64-branches bench-x64-cmov bench-c-2-gcc bench-c-2-clang
+all: \
+	bench-c-gcc \
+	bench-c-clang \
+	bench-c-2-gcc \
+	bench-c-2-clang \
+	bench-x64-1 \
+	bench-x64-2 \
+	bench-x64-3
 
 bench.o: bench.c
 	cc -c -O2 -march=native -g -Wall -o $@ $^
@@ -9,10 +16,12 @@ bench.o: bench.c
 %-gcc.c.o: %.c
 	gcc -O3 -march=native -g -Wall -c -o $@ $^
 
-*.x64.o:
+%.x64.o: %.x64.s
+	as -o $@ $^
+	strip --strip-unneeded $@
 
-bench-c-%: bench.o just-switch-%.c.o
+bench-c-%: bench.o loop-%.c.o
 	cc -o $@ $^
 
-bench-x64-%: bench.o just-switch-%.x64.s
+bench-x64-%: bench.o loop-%.x64.o
 	cc -o $@ $^

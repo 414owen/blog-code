@@ -2,7 +2,7 @@
 
 int run_switches(char *input) {
   int res = 0;
-  do {
+  while (true) {
     char c = *input++;
     switch (c) {
       case '\0':
@@ -16,5 +16,5 @@ int run_switches(char *input) {
       default:
         break;
     }
-  } while (true);
+  }
 }
