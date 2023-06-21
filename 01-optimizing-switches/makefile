@@ -1,11 +1,14 @@
 all: \
-	bench-c-gcc \
-	bench-c-clang \
+	bench-c-1-gcc \
+	bench-c-1-clang \
 	bench-c-2-gcc \
 	bench-c-2-clang \
 	bench-x64-1 \
 	bench-x64-2 \
-	bench-x64-3
+	bench-x64-3 \
+	bench-x64-4 \
+	bench-x64-5 \
+	bench-x64-6
 
 bench.o: bench.c
 	cc -c -O2 -march=native -g -Wall -o $@ $^
