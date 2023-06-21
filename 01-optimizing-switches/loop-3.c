@@ -1,5 +1,6 @@
 #include <stdbool.h>
 
+static
 int to_add[256] = {
   ['s'] = 1,
   ['p'] = -1,
