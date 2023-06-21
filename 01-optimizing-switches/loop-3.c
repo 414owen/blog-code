@@ -1,5 +1,10 @@
 #include <stdbool.h>
 
+int to_add[256] = {
+  ['s'] = 1,
+  ['p'] = -1,
+};
+
 int run_switches(char *input) {
   int res = 0;
   do {
@@ -7,6 +12,6 @@ int run_switches(char *input) {
     if (c == '\0') {
       return res;
     }
-    res += c == 's' ? 1 : c == 'p' ? -1 : 0;
+    res += to_add[c];
   } while (true);
 }

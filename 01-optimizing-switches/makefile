@@ -3,6 +3,8 @@ all: \
 	bench-c-1-clang \
 	bench-c-2-gcc \
 	bench-c-2-clang \
+	bench-c-3-gcc \
+	bench-c-3-clang \
 	bench-x64-1 \
 	bench-x64-2 \
 	bench-x64-3 \
