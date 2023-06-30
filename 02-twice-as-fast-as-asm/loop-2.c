@@ -7,10 +7,10 @@ int to_add[256] = {
   ['p'] = -1,
 };
 
-int run_switches(const char *input) {
+int run_switches(const uint8_t *input) {
   int res = 0;
   while (true) {
-    char c = *input++;
+    uint8_t c = *input++;
     if (c == '\0') {
       return res;
     } else {
