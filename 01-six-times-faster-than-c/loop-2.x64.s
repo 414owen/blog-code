@@ -5,16 +5,12 @@
 .type run_switches, @function
 .intel_syntax noprefix
 
+# Starting point: clang's output
 # Changes: 
-# * Move s: block to the top
-# * Fall through s: into the loop
-# * Jump into the loop from the initial function block
+# * Move check for '\0' to last place in the loop
 
 run_switches:
   xor     eax, eax
-  jmp     loop
-s:
-  inc     eax
 loop:
   movsx   ecx, byte ptr [rdi]
   inc     rdi
@@ -27,4 +23,7 @@ loop:
   ret
 p:
   dec     eax
+  jmp     loop
+s:
+  inc     eax
   jmp     loop

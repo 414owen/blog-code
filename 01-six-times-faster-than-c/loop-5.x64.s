@@ -6,10 +6,18 @@
 .intel_syntax noprefix
 
 # Changes: 
-# * Use replace a cmov with a sete
+# * Use cmov to eliminate some branches
+
+# rdi: char *input
+# eax: ouput
+# r8:  1
+# edx: -1
+# ecx: char c
+# esi: n
 
 run_switches:
         xor   eax, eax             # res = 0
+        mov   r8d, 1               # need  1 in a register later
         mov   edx, -1              # need -1 in a register later
 loop:                              # while (true) {
         movsx ecx, byte ptr [rdi]  #   char c = *input
@@ -17,10 +25,10 @@ loop:                              # while (true) {
         je    ret                  #     return
         inc   rdi                  #   input++
         mov   esi, 0               #   n = 0
-        cmp   ecx, 's'             #   c == 's'?
-        sete  sil                  #     n = 0|1
         cmp   ecx, 'p'             #   if (c == 'p')
         cmove esi, edx             #     n = -1
+        cmp   ecx, 's'             #   c == 's'?
+        cmove esi, r8d             #     n = 1
         add   eax, esi             #   res += n
         jmp   loop                 # }
 ret:

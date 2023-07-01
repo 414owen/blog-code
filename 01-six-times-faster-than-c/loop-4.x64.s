@@ -6,30 +6,24 @@
 .intel_syntax noprefix
 
 # Changes: 
-# * Use cmov to eliminate some branches
-
-# rdi: char *input
-# eax: ouput
-# r8:  1
-# edx: -1
-# ecx: char c
-# esi: n
+# * Move p: block above s: block
+# * Fall through p: into s:
+# * Change p: action from decrement to subtract 2
 
 run_switches:
-        xor   eax, eax             # res = 0
-        mov   r8d, 1               # need  1 in a register later
-        mov   edx, -1              # need -1 in a register later
-loop:                              # while (true) {
-        movsx ecx, byte ptr [rdi]  #   char c = *input
-        test  ecx, ecx             #   if (c == '\0')
-        je    ret                  #     return
-        inc   rdi                  #   input++
-        mov   esi, 0               #   n = 0
-        cmp   ecx, 'p'             #   if (c == 'p')
-        cmove esi, edx             #     n = -1
-        cmp   ecx, 's'             #   c == 's'?
-        cmove esi, r8d             #     n = 1
-        add   eax, esi             #   res += n
-        jmp   loop                 # }
-ret:
-        ret
+  xor     eax, eax
+  jmp     loop
+p:
+  sub     eax, 2
+s:
+  inc     eax
+loop:
+  movsx   ecx, byte ptr [rdi]
+  inc     rdi
+  cmp     ecx, 'p'
+  je      p
+  cmp     ecx, 's'
+  je      s
+  test    ecx, ecx
+  jne     loop
+  ret

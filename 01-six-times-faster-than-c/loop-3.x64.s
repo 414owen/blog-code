@@ -6,15 +6,13 @@
 .intel_syntax noprefix
 
 # Changes: 
-# * Move p: block above s: block
-# * Fall through p: into s:
-# * Change p: action from decrement to subtract 2
+# * Move s: block to the top
+# * Fall through s: into the loop
+# * Jump into the loop from the initial function block
 
 run_switches:
   xor     eax, eax
   jmp     loop
-p:
-  sub     eax, 2
 s:
   inc     eax
 loop:
@@ -27,3 +25,6 @@ loop:
   test    ecx, ecx
   jne     loop
   ret
+p:
+  dec     eax
+  jmp     loop
