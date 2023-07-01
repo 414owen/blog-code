@@ -7,14 +7,14 @@ int to_add[256] = {
   ['p'] = -1,
 };
 
-int run_switches(const uint8_t *input) {
+int run_switches(const uint8_t *restrict input) {
   int res = 0;
   while (true) {
-    uint8_t c = *input++;
-    if (c == '\0') {
+    const uint64_t c = *input++;
+    if (c == 0) {
       return res;
     } else {
-      res += to_add[(int) c];
+      res += to_add[c];
     }
   }
 }

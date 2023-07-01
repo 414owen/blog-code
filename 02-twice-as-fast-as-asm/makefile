@@ -4,16 +4,22 @@ all: \
 	bench-c-2-gcc \
 	bench-c-2-clang \
 	bench-c-3-gcc \
-	bench-c-3-clang
+	bench-c-3-clang \
+	bench-x64-4 \
+	bench-x64-4 \
+	bench-x64-5 \
+	bench-x64-5
 
 bench.o: bench.c
 	cc -c -O2 -march=native -g -Wall -o $@ $^
 
 %-clang.c.o: %.c
-	clang -O3 -march=native -g -Wall -c -o $@ $^
+	clang -O3 -march=native -s -Wall -c -o $@ $^
+	strip --strip-unneeded $@
 
 %-gcc.c.o: %.c
-	gcc -O3 -march=native -g -Wall -c -o $@ $^
+	gcc -O3 -march=native -s -Wall -c -o $@ $^
+	strip --strip-unneeded $@
 
 %.x64.o: %.x64.s
 	as -o $@ $^
