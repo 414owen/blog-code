@@ -1,20 +1,20 @@
 #include <stdbool.h>
-#include <stdint.h>
 
-static
-int to_add[256] = {
-  ['s'] = 1,
-  ['p'] = -1,
-};
-
-int run_switches(const char *input) {
+int run_switches(char *input) {
   int res = 0;
   while (true) {
     char c = *input++;
-    if (c == '\0') {
-      return res;
-    } else {
-      res += to_add[(int) c];
+    switch (c) {
+      case '\0':
+        return res;
+      case 's':
+        res++;
+        break;
+      case 'p':
+        res--;
+        break;
+      default:
+        break;
     }
   }
 }

@@ -2,7 +2,9 @@ all: \
 	bench-c-1-gcc \
 	bench-c-1-clang \
 	bench-c-2-gcc \
-	bench-c-2-clang
+	bench-c-2-clang \
+	bench-c-3-gcc \
+	bench-c-3-clang
 
 bench.o: bench.c
 	cc -c -O2 -march=native -g -Wall -o $@ $^
