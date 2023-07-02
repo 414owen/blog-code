@@ -1,12 +1,18 @@
 .section .note.GNU-stack, "", @progbits
 
-.text
+# This is a simple hand-written encoding of the c version
+
 .global run_switches
 .type run_switches, @function
 .intel_syntax noprefix
 
-# This is a simple hand-written encoding of the c version
+.section .rodata
+add_arr:
+        .fill 'p', 4, 0
+        .long -1, 0, 0, 1
+        .fill (256 - 's'), 4, 0
 
+.text
 run_switches:
         xor   eax, eax                           # res = 0
 loop:                                            # while (true) {
@@ -18,8 +24,3 @@ loop:                                            # while (true) {
         jmp   loop                               # }
 ret:    ret
 
-.data
-add_arr:
-        .fill 'p', 4, 0
-        .long -1, 0, 0, 1
-        .fill (256 - 's'), 4, 0
