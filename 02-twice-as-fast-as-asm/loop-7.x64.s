@@ -5,12 +5,11 @@
 .type run_switches, @function
 .intel_syntax noprefix
 
-# This is basically just gcc's output, with
-# the data section filled in
+# Changes
 
 run_switches:
         movzx  eax, byte ptr [rdi] # eax = *input
-        lea    rdx, [rdi+0x1]      # rdx = input + 1
+        lea    rdx, [rdi+1]      # rdx = input + 1
         xor    ecx, ecx            # ecx = result
         lea    rsi, [add_arr]
         test   rax, rax

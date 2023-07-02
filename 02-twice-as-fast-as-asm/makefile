@@ -10,7 +10,9 @@ all: \
 	bench-x64-5 \
 	bench-x64-5 \
 	bench-x64-6 \
-	bench-x64-6
+	bench-x64-6 \
+	bench-x64-7 \
+	bench-x64-7
 
 bench.o: bench.c
 	cc -c -O2 -march=native -g -Wall -o $@ $^
