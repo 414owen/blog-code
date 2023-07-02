@@ -10,7 +10,7 @@ int to_add[256] = {
 int run_switches(const uint8_t *restrict input) {
   int res = 0;
   while (true) {
-    const uint8_t c = *input++;
+    const uint64_t c = *input++;
     if (c == 0) {
       return res;
     } else {

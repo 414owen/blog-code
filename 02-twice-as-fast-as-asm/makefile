@@ -5,10 +5,12 @@ all: \
 	bench-c-2-clang \
 	bench-c-3-gcc \
 	bench-c-3-clang \
-	bench-x64-4 \
-	bench-x64-4 \
+	bench-c-4-gcc \
+	bench-c-4-clang \
 	bench-x64-5 \
-	bench-x64-5
+	bench-x64-5 \
+	bench-x64-6 \
+	bench-x64-6
 
 bench.o: bench.c
 	cc -c -O2 -march=native -g -Wall -o $@ $^
