@@ -12,17 +12,17 @@ all: \
 	bench-x64-6 \
 	bench-x64-6 \
 	bench-x64-7 \
-	bench-x64-7
+	bench-c-9-gcc
 
 bench.o: bench.c
-	cc -c -O2 -march=native -g -Wall -o $@ $^
+	cc -c -O2 -march=native -g -Wall ${CFLAGS} -o $@ $^
 
 %-clang.c.o: %.c
-	clang -O3 -march=native -s -Wall -c -o $@ $^
+	clang -O3 -march=native -s -Wall ${CFLAGS} -c -o $@ $^
 	strip --strip-unneeded $@
 
 %-gcc.c.o: %.c
-	gcc -O3 -march=native -s -Wall -c -o $@ $^
+	gcc -O3 -march=native -s -Wall ${CFLAGS} -c -o $@ $^
 	strip --strip-unneeded $@
 
 %.x64.o: %.x64.s
@@ -30,7 +30,11 @@ bench.o: bench.c
 	strip --strip-unneeded $@
 
 bench-c-%: bench.o loop-%.c.o
-	cc -o $@ $^
+	cc ${CFLAGS} -o $@ $^
 
 bench-x64-%: bench.o loop-%.x64.o
-	cc -o $@ $^
+	cc ${CFLAGS} -o $@ $^
+
+clean:
+	rm bench-*
+	rm *.o

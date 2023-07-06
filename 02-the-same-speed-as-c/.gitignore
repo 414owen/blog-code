@@ -1,3 +1,4 @@
 bench-*
 *.o
 *.out
+loop-8-*
